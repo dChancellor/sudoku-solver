@@ -1,0 +1,36 @@
+/* Import fonts */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  /* Add imported font here */
+  font-family: sans-serif;
+}
+body {
+  line-height: 1.5rem;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.2rem;
+}
+
+button {
+  all: revert;
+}
+
+:root {
+  --clr-neutral-100: white;
+  --clr-neutral-500: grey;
+  --clr-neutral-900: black;
+}
