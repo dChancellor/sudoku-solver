@@ -26,11 +26,15 @@ const getPuzzles = async () => {
   };
 
 app.get('/', async (req, res) => {
-    const data = await getPuzzles();
-    res.send(data);
+    res.send({message: '🚀'});
+})
+
+app.get('/sudoku', async (req, res) => {
+  const data = await getPuzzles();
+  res.send(data);
 })
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
-module.exports = app;
+module.exports = {app, getPuzzles};
