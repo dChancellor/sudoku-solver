@@ -16,25 +16,25 @@ app.use(cors());
 const middlewares = require('./middleware');
 
 const getPuzzles = async () => {
-    const url = `https://www.nytimes.com/puzzles/sudoku/easy`;
-    let { data: html } = await axios.get(url);
-    let $parse = $.load(html);
-    let windowString = $parse('script').get()[0].children[0].data;
-    return JSON.parse(
-      windowString.substr(windowString.indexOf('{'), windowString.length)
-    );
-  };
+  const url = `https://www.nytimes.com/puzzles/sudoku/easy`;
+  let { data: html } = await axios.get(url);
+  let $parse = $.load(html);
+  let windowString = $parse('script').get()[0].children[0].data;
+  return JSON.parse(
+    windowString.substr(windowString.indexOf('{'), windowString.length)
+  );
+};
 
 app.get('/', async (req, res) => {
-    res.send({message: '🎂'});
-})
+  res.send({ message: '🚀' });
+});
 
 app.get('/sudoku', async (req, res) => {
   const data = await getPuzzles();
   res.send(data);
-})
+});
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
 
-module.exports = {app, getPuzzles};
+module.exports = { app, getPuzzles };
