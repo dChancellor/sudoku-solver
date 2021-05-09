@@ -12,7 +12,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm ci
-      working-directory: server
-      - run: npm test
-      working-directory: server
+      - name: Clean install dependencies
+        run: npm ci
+        working-directory: ./server
+      - name: Run Jest test suite
+        run: npm test
+        working-directory: ./server
