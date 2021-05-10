@@ -30,6 +30,7 @@ app.get('/', async (req, res) => {
 });
 
 app.get('/sudoku', async (req, res) => {
+  // Scrapes puzzles from NYT
   const data = await getPuzzles();
   res.send(data);
 });
