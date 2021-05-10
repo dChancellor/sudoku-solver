@@ -25,12 +25,11 @@ const getPuzzles = async () => {
   );
 };
 
-app.get('/', async (req, res) => {
+app.get('/', async (_, res) => {
   res.send({ message: '🚀' });
 });
 
-app.get('/sudoku', async (req, res) => {
-  // Scrapes puzzles from NYT
+app.get('/sudoku', async (_, res) => {
   const data = await getPuzzles();
   res.send(data);
 });
