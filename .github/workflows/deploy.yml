@@ -12,10 +12,10 @@ jobs:
       - name: Copy repository contents via scp
         uses: dChancellor/scp-action@master
         env:
-          HOST: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSHKEY }}
+          HOST: ${{ secrets.LIGHTSAIL_HOST }}
+          USERNAME: ${{ secrets.LIGHTSAIL_USERNAME }}
+          PORT: ${{ secrets.LIGHTSAIL_PORT }}
+          KEY: ${{ secrets.LIGHTSAIL_SSHKEY }}
         with:
           source: './server'
           target: '~/dev/sudoku-solver'
@@ -23,8 +23,8 @@ jobs:
       - name: Executing remote command
         uses: dChancellor/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          USERNAME: ${{ secrets.USERNAME }}
-          PORT: ${{ secrets.PORT }}
-          KEY: ${{ secrets.SSHKEY }}
+          host: ${{ secrets.LIGHTSAIL_HOST }}
+          USERNAME: ${{ secrets.LIGHTSAIL_USERNAME }}
+          PORT: ${{ secrets.LIGHTSAIL_PORT }}
+          KEY: ${{ secrets.LIGHTSAIL_SSHKEY }}
           script: ls
