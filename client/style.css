@@ -33,4 +33,56 @@ button {
   --clr-neutral-100: white;
   --clr-neutral-500: grey;
   --clr-neutral-900: black;
+  --clr-darkblue: hsl(240, 40%, 49%);
+}
+
+/* ----------------------------- */
+
+#board {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.1em;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 0.3em solid var(--clr-darkblue);
+}
+
+.row {
+  display: flex;
+  flex-flow: row nowrap;
+  gap: 0.1em;
+}
+
+.row:nth-child(3n + 3) {
+  border-bottom: 0.3em solid var(--clr-darkblue);
+}
+
+.cell {
+  background-color: lightblue;
+  width: 5rem;
+  height: 5rem;
+  color: white;
+  font-size: 3rem;
+  line-height: 4rem;
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.cell:nth-child(3n + 3) {
+  border-right: 0.1em solid var(--clr-darkblue);
+}
+
+.selected {
+  background-color: red;
+}
+
+.success {
+  display: none;
+  position: absolute;
+  bottom: 50px;
+  text-align: center;
+  width: 100%;
 }
