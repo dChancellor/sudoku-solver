@@ -10,28 +10,52 @@
     <script defer src="./script.js"></script>
   </head>
   <body>
-    <section class="options">
-      <button
-        id="easy"
-        class="selected difficulty_button"
-        onclick="buttonClick('easy')"
-      >
-        Easy
-      </button>
-      <button
-        id="medium"
-        class="difficulty_button"
-        onclick="buttonClick('medium')"
-      >
-        Medium
-      </button>
-      <button id="hard" class="difficulty_button" onclick="buttonClick('hard')">
-        Hard
-      </button>
-      <label for="timeout">Time between moves(in ms)</label>
-      <input id="timeout" type="number" name="timeout" value="10" step="10" />
-      <button onclick="start()">Start</button>
-    </section>
+    <header>
+      <h1>New York Times Sudoku Solver</h1>
+      <p>
+        If you ever wanted to have a solved New York Times sudoku puzzle but you
+        don't want to go through the effort of doing it yourself then this is
+        the app for you. Select the difficulty and then increase the delay
+        between moves if you would like to watch the algorithm do its work.
+        Thanks for coming!
+      </p>
+
+      <section class="options">
+        <button
+          id="easy"
+          class="selected difficulty_button"
+          onclick="buttonClick('easy')"
+        >
+          Easy
+        </button>
+        <button
+          id="medium"
+          class="difficulty_button"
+          onclick="buttonClick('medium')"
+        >
+          Medium
+        </button>
+        <button
+          id="hard"
+          class="difficulty_button"
+          onclick="buttonClick('hard')"
+        >
+          Hard
+        </button>
+        <div>
+          <label for="timeout">Time between moves(in ms)</label>
+          <input
+            id="timeout"
+            type="number"
+            name="timeout"
+            value="10"
+            step="10"
+          />
+        </div>
+        <button onclick="start()">Start</button>
+      </section>
+    </header>
+    <h1 class="loading">Retrieving Puzzles...</h1>
     <div id="board_container"></div>
     <h1 class="success">Complete!</h1>
   </body>

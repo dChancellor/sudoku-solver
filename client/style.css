@@ -1,4 +1,5 @@
 /* Import fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
 *,
 *::before,
@@ -13,7 +14,7 @@ h3,
 p {
   margin: 0;
   /* Add imported font here */
-  font-family: sans-serif;
+  font-family: 'Montserrat', sans-serif;
 }
 body {
   line-height: 1.5rem;
@@ -28,61 +29,105 @@ h3 {
 button {
   all: revert;
 }
-
 :root {
-  --clr-neutral-100: white;
-  --clr-neutral-500: grey;
-  --clr-neutral-900: black;
-  --clr-darkblue: hsl(240, 40%, 49%);
+  --clr-cell-background: hsl(195, 53%, 79%);
+  --clr-border-dark: hsl(248, 39%, 39%);
+  --clr-border-light: hsl(240, 20%, 37%);
+  --clr-text-numbers: hsl(240, 100%, 100%);
+  --clr-text-headers: #000;
+  --clr-text-paragraph: #000;
+  --clr-button: hsl(240, 20%, 37%);
+  --clr-button-selected: hsl(195, 33%, 59%);
 }
-
 /* ----------------------------- */
-
+header {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+}
+header h1 {
+  color: var(--clr-text-headers);
+  text-align: center;
+  padding: 2rem;
+  font-size: 2.5rem;
+}
+header p {
+  padding: 1rem;
+  color: var(--clr-text-paragraph);
+  max-width: 70ch;
+  text-align: center;
+}
+#board_container {
+  position: relative;
+  margin: 1rem;
+}
 #board {
   display: flex;
   flex-flow: column nowrap;
-  gap: 0.1em;
   margin: auto;
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  border: 0.3em solid var(--clr-darkblue);
+  transform: translate(-50%);
+  border: 0.3em solid var(--clr-border-dark);
+  box-shadow:1px 1px 1px 1px
 }
 
 .row {
   display: flex;
   flex-flow: row nowrap;
-  gap: 0.1em;
 }
 
-.row:nth-child(3n + 3) {
-  border-bottom: 0.3em solid var(--clr-darkblue);
+.row:nth-child(3n + 3):not(:last-child) {
+  border-bottom: 5px solid var(--clr-border-dark);
 }
 
 .cell {
-  background-color: lightblue;
-  width: 5rem;
-  height: 5rem;
-  color: white;
-  font-size: 3rem;
-  line-height: 4rem;
-  text-align: center;
-  font-family: Georgia, 'Times New Roman', Times, serif;
+  background-color: var(--clr-cell-background);
+  border: 1px solid var(--clr-border-light);
+  width: clamp(1vw, 9vw, 5rem);
+  height: clamp(1vw, 9vw, 5rem);
+  color: var(--clr-text-numbers);
+  font-size: clamp(2.5vw, 5vw, 2rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.cell:nth-child(3n + 3) {
-  border-right: 0.1em solid var(--clr-darkblue);
+.cell:nth-child(3n + 3):not(:last-child) {
+  border-right: 5px solid var(--clr-border-dark);
 }
-
+button {
+  padding: 0.5rem 1rem;
+  color: var(--clr-text-numbers);
+  background-color: var(--clr-button);
+  font-size: 1.4rem;
+}
 .selected {
-  background-color: red;
+  background-color: var(--clr-button-selected);
 }
-
+.options {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+label {
+  font-size: 1.3rem;
+}
 .success {
   display: none;
   position: absolute;
   bottom: 50px;
   text-align: center;
   width: 100%;
+}
+.loading {
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

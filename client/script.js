@@ -13,10 +13,11 @@ const buttonClick = (inputDifficulty) => {
 };
 
 const getPuzzles = () => {
-  console.log('Getting puzzles...');
+  document.querySelector('.loading').style.display = 'block';
   return fetch(apiURL)
     .then((response) => response.json())
     .then((data) => {
+      document.querySelector('.loading').style.display = 'none';
       return data;
     });
 };
