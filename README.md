@@ -1,6 +1,6 @@
 ## Sudoku Solver
 
-A simple web app that pulls todays' New York Times sudoku games and provides a client showing a solution using a backtracking algorithm.
+A simple web app that pulls today's New York Times sudoku games and provides a client showing a solution using a backtracking algorithm.
 
 ### Setup
 
