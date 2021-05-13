@@ -1,6 +1,6 @@
 ## Sudoku Solver
 
-A simple web app that pulls todays' New York Times sudoku games and provides a client showing a solution using a backtracking algorithm.
+A simple web app that pulls today's New York Times sudoku games and provides a client showing a solution using a backtracking algorithm.
 
 ### Setup
 
@@ -11,18 +11,4 @@ npm install
 npm start
 ```
 
-To run the client, you can either start it without building by navigating to the client folder and running
-
-```sh
-npm install 
-npm start
-```
-
-
-Or you can build it first and host it on a CDN or some local server by building it with
-
-```sh
-npm install 
-npm build
-```
-
+To run the client, just host the client folder on your CDN of choice and point the config.js url to your api!

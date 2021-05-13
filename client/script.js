@@ -1,71 +1,127 @@
-const getPuzzle = (difficulty) => {
-  const url = `https://www.nytimes.com/puzzles/sudoku/${difficulty}`;
-  $.getJSON(
-    'http://www.whateverorigin.org/get?url=' +
-      encodeURIComponent(url) +
-      '&callback=?',
-    function (data) {
-      console.log(data);
-      alert(data.contents);
-    }
-  );
-  // const { data } = $.get(url);
+import getPuzzles from './api/api';
+
+let difficulty = 'easy';
+let started = false;
+let NYTPuzzles;
+let puzzle = [];
+
+const buttonClick = (inputDifficulty) => {
+  difficulty = inputDifficulty;
+  let buttons = document.querySelectorAll('.difficulty_button');
+  buttons.forEach((button) => {
+    button.classList.remove('selected');
+  });
+  document.querySelector(`#${difficulty}`).classList.add('selected');
 };
 
-getPuzzle('easy');
+const timeout = (length) => {
+  return new Promise((resolve) => setTimeout(resolve, length));
+};
 
-function possible(board, y, x, n) {
-  for (let i = 0; i < 9; i++) {
-    if (board[y][i] === n || board[i][x] === n) {
-      return false;
+const clearGUI = () => {
+  console.log('clearing the board..');
+  document.querySelector('#board').remove();
+  document.querySelector('.success').style.display = 'none';
+  puzzle = [];
+};
+
+const createGUI = () => {
+  let boardContainer = document.getElementById('board_container');
+  let board = document.createElement('div');
+  board.id = 'board';
+  boardContainer.appendChild(board);
+  for (let i = 0; i < 9; i += 1) {
+    let row = document.createElement('section');
+    row.className = 'row';
+    row.id = i;
+    board.appendChild(row);
+    for (let j = 0; j < 9; j += 1) {
+      let cell = document.createElement('div');
+      cell.className = 'cell';
+      cell.id = `${i}-${j}`;
+      row.appendChild(cell);
     }
   }
+};
 
-  const xSquare = Math.floor(x / 3) * 3;
-  const ySquare = Math.floor(y / 3) * 3;
+const updateGUI = (board) => {
+  board.forEach((row, rowIndex) => {
+    row.forEach((cell, cellIndex) => {
+      if (cell != 0)
+        document.getElementById(`${rowIndex}-${cellIndex}`).innerHTML = cell;
+    });
+  });
+};
+
+function nextEmptySpot(board) {
+  for (var row = 0; row < 9; row += 1) {
+    for (var col = 0; col < 9; col += 1) {
+      if (board[row][col] === 0) return [row, col];
+    }
+  }
+  return [-1, -1];
+}
+
+const evaluateSubGrid = (board, rowIndex, columnIndex, guess) => {
+  const xBounds = Math.floor(columnIndex / 3) * 3;
+  const yBounds = Math.floor(rowIndex / 3) * 3;
 
   for (let i = 0; i < 3; i++) {
     for (let j = 0; j < 3; j++) {
-      if (board[ySquare + i][xSquare + j] === n) {
+      if (board[yBounds + i][xBounds + j] === guess) {
         return false;
       }
     }
   }
-
   return true;
-}
+};
 
-function solve(board) {
-  for (let y = 0; y < 9; y++) {
-    for (let x = 0; x < 9; x++) {
-      if (board[y][x] === 0) {
-        for (let n = 1; n <= 9; n++) {
-          if (possible(board, y, x, n)) {
-            board[y][x] = n;
-
-            if (solve(board)) return board;
-          }
-        }
-
-        board[y][x] = 0;
-        return false;
-      }
+const evaluateLine = (board, rowIndex, columnIndex, guess) => {
+  for (let pointer = 0; pointer < 9; pointer += 1) {
+    if (
+      board[rowIndex][pointer] === guess ||
+      board[pointer][columnIndex] === guess
+    ) {
+      return false;
     }
+  }
+  return true;
+};
+
+const solve = async (board, selectedTimeout) => {
+  let [row, col] = nextEmptySpot(board);
+  if (row === -1) {
+    return board;
+  }
+  for (let guess = 1; guess <= 9; guess += 1) {
+    if (
+      evaluateLine(board, row, col, guess) &&
+      evaluateSubGrid(board, row, col, guess)
+    ) {
+      board[row][col] = guess;
+      await timeout(selectedTimeout).then(() => updateGUI(board));
+      await solve(board, selectedTimeout);
+    }
+  }
+  if (nextEmptySpot(board)[0] !== -1) {
+    board[row][col] = 0;
   }
 
   return board;
-}
+};
 
-const puzzle = [
-  [5, 3, 0, 0, 7, 0, 0, 0, 0],
-  [6, 0, 0, 1, 9, 5, 0, 0, 0],
-  [0, 9, 8, 0, 0, 0, 0, 6, 0],
-  [8, 0, 0, 0, 6, 0, 0, 0, 3],
-  [4, 0, 0, 8, 0, 3, 0, 0, 1],
-  [7, 0, 0, 0, 2, 0, 0, 0, 6],
-  [0, 6, 0, 0, 0, 0, 2, 8, 0],
-  [0, 0, 0, 4, 1, 9, 0, 0, 5],
-  [0, 0, 0, 0, 8, 0, 0, 7, 9],
-];
-
-//   console.log(solve(puzzle).map(e => "" + e));
+const start = async () => {
+  if (started) clearGUI();
+  await timeout(500);
+  started = true;
+  let selectedTimeout = document.querySelector('#timeout').value;
+  if (!NYTPuzzles) NYTPuzzles = await getPuzzles();
+  let rawPuzzle = NYTPuzzles[`${difficulty}`].puzzle_data.puzzle;
+  for (let i = 0; i <= 72; i += 9) {
+    puzzle.push(rawPuzzle.slice(i, i + 9));
+  }
+  await createGUI();
+  updateGUI(puzzle);
+  await solve(puzzle, selectedTimeout);
+  document.querySelector('.success').style.display = 'block';
+};

@@ -5,13 +5,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sudoku Solver</title>
-    <script
-			  src="https://code.jquery.com/jquery-3.6.0.min.js"
-			  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-			  crossorigin="anonymous"></script>
-    <script src="./script.js"></script>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" type="image/ico" href="./favicon.ico" />
+    <!-- <script defer src="./config.js"></script> -->
+    <script defer src="./script.js"></script>
   </head>
   <body>
-    <h1>Hello, Chancellor</h1>
+    <header>
+      <h1>New York Times Sudoku Solver</h1>
+      <p>
+        If you ever wanted to have a solved New York Times sudoku puzzle but you
+        don't want to go through the effort of doing it yourself then this is
+        the app for you. Select the difficulty and then increase the delay
+        between moves if you would like to watch the algorithm do its work.
+        Thanks for coming!
+      </p>
+
+      <section class="options">
+        <button
+          id="easy"
+          class="selected difficulty_button"
+          onclick="buttonClick('easy')"
+        >
+          Easy
+        </button>
+        <button
+          id="medium"
+          class="difficulty_button"
+          onclick="buttonClick('medium')"
+        >
+          Medium
+        </button>
+        <button
+          id="hard"
+          class="difficulty_button"
+          onclick="buttonClick('hard')"
+        >
+          Hard
+        </button>
+        <div>
+          <label for="timeout">Time between moves(in ms)</label>
+          <input
+            id="timeout"
+            type="number"
+            name="timeout"
+            value="10"
+            step="10"
+          />
+        </div>
+        <button onclick="start()">Start</button>
+      </section>
+    </header>
+    <h1 class="loading">Retrieving Puzzles...</h1>
+    <div id="board_container"></div>
+    <h1 class="success">Complete!</h1>
   </body>
 </html>
