@@ -6,4 +6,4 @@ services:
     ports:
       - 5000:${PORT}
     volumes:
-      - ./:/usr/src/app:cached
+      - ./server:/usr/src/app:cached
