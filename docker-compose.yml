@@ -1,0 +1,9 @@
+services:
+  app:
+    image: sudoku_solver
+    build: .
+    restart: always
+    ports:
+      - 5000:${PORT}
+    volumes:
+      - ./:/usr/src/app:cached
