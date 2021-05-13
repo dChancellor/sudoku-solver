@@ -1,3 +1,5 @@
+import getPuzzles from './api/api';
+
 let difficulty = 'easy';
 let started = false;
 let NYTPuzzles;
@@ -10,16 +12,6 @@ const buttonClick = (inputDifficulty) => {
     button.classList.remove('selected');
   });
   document.querySelector(`#${difficulty}`).classList.add('selected');
-};
-
-const getPuzzles = () => {
-  document.querySelector('.loading').style.display = 'block';
-  return fetch(API_URL)
-    .then((response) => response.json())
-    .then((data) => {
-      document.querySelector('.loading').style.display = 'none';
-      return data;
-    });
 };
 
 const timeout = (length) => {
