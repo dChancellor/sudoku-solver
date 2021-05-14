@@ -3,10 +3,10 @@ const supertest = require('supertest');
 const request = supertest(app);
 
 describe('Testing API functionality', () => {
-  it('should GET the / endpoint and return a 🚀', async (done) => {
+  it('should GET the / endpoint and return a 🎂', async (done) => {
     const res = await request.get('/');
     expect(res.status).toBe(200);
-    expect(res.body.message).toBe('🚀');
+    expect(res.body.message).toBe('🎂');
     done();
   });
 

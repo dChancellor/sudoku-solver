@@ -26,7 +26,7 @@ const getPuzzles = async () => {
 };
 
 app.get('/', async (_, res) => {
-  res.send({ message: '🚀' });
+  res.send({ message: '🎂' });
 });
 
 app.get('/sudoku', async (_, res) => {
