@@ -109,7 +109,6 @@ const solve = async (board, selectedTimeout) => {
 };
 
 const start = async () => {
-  console.log('hello');
   if (started) clearGUI();
   await timeout(500);
   started = true;
