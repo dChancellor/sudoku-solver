@@ -3,6 +3,14 @@ let started = false;
 let NYTPuzzles;
 let puzzle = [];
 
+const getPuzzles = () => {
+  return fetch(API_URL)
+    .then((response) => response.json())
+    .then((data) => {
+      return data;
+    });
+};
+
 const buttonClick = (inputDifficulty) => {
   difficulty = inputDifficulty;
   let buttons = document.querySelectorAll('.difficulty_button');
@@ -114,10 +122,9 @@ const start = async () => {
   started = true;
   let selectedTimeout = document.querySelector('#timeout').value;
   document.querySelector('.loading').style.display = 'block';
-  if (!NYTPuzzles)
-    NYTPuzzles = await getPuzzles().then(
-      () => (document.querySelector('.loading').style.display = 'none')
-    );
+  if (!NYTPuzzles) NYTPuzzles = await getPuzzles();
+  document.querySelector('.loading').style.display = 'none';
+  console.log(NYTPuzzles);
   let rawPuzzle = NYTPuzzles[`${difficulty}`].puzzle_data.puzzle;
   for (let i = 0; i <= 72; i += 9) {
     puzzle.push(rawPuzzle.slice(i, i + 9));
