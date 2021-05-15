@@ -1,4 +1,4 @@
-const getPuzzles = () => {
+export const getPuzzles = () => {
   document.querySelector('.loading').style.display = 'block';
   return fetch(API_URL)
     .then((response) => response.json())
@@ -7,5 +7,3 @@ const getPuzzles = () => {
       return data;
     });
 };
-
-module.exports = getPuzzles;
