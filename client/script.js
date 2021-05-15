@@ -113,7 +113,11 @@ const start = async () => {
   await timeout(500);
   started = true;
   let selectedTimeout = document.querySelector('#timeout').value;
-  if (!NYTPuzzles) NYTPuzzles = await getPuzzles();
+  document.querySelector('.loading').style.display = 'block';
+  if (!NYTPuzzles)
+    NYTPuzzles = await getPuzzles().then(
+      () => (document.querySelector('.loading').style.display = 'none')
+    );
   let rawPuzzle = NYTPuzzles[`${difficulty}`].puzzle_data.puzzle;
   for (let i = 0; i <= 72; i += 9) {
     puzzle.push(rawPuzzle.slice(i, i + 9));
