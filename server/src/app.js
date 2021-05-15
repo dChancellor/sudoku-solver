@@ -29,7 +29,7 @@ app.get('/', async (_, res) => {
   res.send({ message: '🎂' });
 });
 
-app.get('/sudoku', async (_, res) => {
+app.get('/nyt', async (_, res) => {
   const data = await getPuzzles();
   res.send(data);
 });

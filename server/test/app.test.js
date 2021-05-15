@@ -12,7 +12,9 @@ describe('Testing API functionality', () => {
 
   it('should retrieve the NYT times sudoku puzzles for today', async (done) => {
     const res = await getPuzzles();
-    expect(new Date(res.displayDate).toLocaleDateString()).toEqual(new Date().toLocaleDateString());
+    expect(new Date(res.displayDate).toLocaleDateString()).toEqual(
+      new Date().toLocaleDateString()
+    );
     expect(res).toHaveProperty('easy', 'medium', 'hard');
     done();
   });
