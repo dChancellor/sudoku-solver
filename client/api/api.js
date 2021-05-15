@@ -1,9 +1,16 @@
+const https = require('https');
+
+const options = {
+  hostname: API_URL,
+  port: 443,
+  path: '/nyt',
+  method: 'GET',
+};
+
 const getPuzzles = () => {
-  return fetch(API_URL)
-    .then((response) => response.json())
-    .then((data) => {
-      return data;
-    });
+  return https.request(options, (res) => {
+    console.log(res.json);
+  });
 };
 
 module.exports = getPuzzles;
