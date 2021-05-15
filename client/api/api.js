@@ -1,4 +1,4 @@
-export const getPuzzles = () => {
+export default getPuzzles = () => {
   document.querySelector('.loading').style.display = 'block';
   return fetch(API_URL)
     .then((response) => response.json())
