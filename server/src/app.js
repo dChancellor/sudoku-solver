@@ -9,7 +9,7 @@ const cors = require('cors');
 
 require('dotenv').config();
 
-app.configure('production', () => app.set('trust proxy', true));
+app.enable('trust proxy');
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors());
