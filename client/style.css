@@ -1,5 +1,5 @@
-/* Import fonts */
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Limelight&display=swap');
 
 *,
 *::before,
@@ -8,39 +8,29 @@
 }
 
 body,
-h1,
 h2,
 h3,
 p {
   margin: 0;
-  /* Add imported font here */
   font-family: 'Montserrat', sans-serif;
 }
 body {
-  line-height: 1.5rem;
-  background-color: hsl(0, 0%, 72%);
-}
-
-h1,
-h2,
-h3 {
-  line-height: 1.2rem;
+  background-color: #37453F;
+  display:flex;
+  flex-flow: column nowrap;
+  align-items:center;
 }
 
 button {
   all: inherit;
 }
 :root {
-  --clr-cell-background: hsl(195, 53%, 79%);
-  --clr-border-dark: hsl(248, 39%, 39%);
-  --clr-border-light: hsl(240, 20%, 37%);
+  --clr-cell-background: #789E8E;
+  --clr-border-dark: #1F2B26;
+  --clr-border-light: #3a5047;
   --clr-text-numbers: hsl(240, 100%, 100%);
-  --clr-text-headers: #000;
-  --clr-text-paragraph: #000;
-  --clr-button: hsl(240, 20%, 37%);
-  --clr-button-selected: hsl(195, 33%, 59%);
 }
-/* ----------------------------- */
+
 header {
   display: flex;
   flex-flow: column nowrap;
@@ -48,16 +38,23 @@ header {
   align-items: center;
 }
 header h1 {
-  color: var(--clr-text-headers);
+  font-family: Limelight, sans-serif;
+  color: #FFFFFF;
+  text-shadow: -11px 6px 3px rgba(0, 0, 0, 0.25);
   text-align: center;
-  padding: 2rem;
-  font-size: 2.5rem;
+  margin-top: 5rem;
+  font-size: 3.5rem;
 }
-header p {
+p {
   padding: 1rem;
-  color: var(--clr-text-paragraph);
+  color: white;
   max-width: 70ch;
   text-align: center;
+  font-size:1.2rem;
+  padding:2rem;
+  background-color:rgb(61, 87, 76);
+  border-radius:10px;
+  margin-top:1rem;
 }
 #board_container {
   position: relative;
@@ -67,10 +64,6 @@ header p {
   display: flex;
   flex-flow: column nowrap;
   margin: auto;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%);
   border: 0.3em solid var(--clr-border-dark);
   box-shadow: 1px 1px 1px 1px;
 }
@@ -89,8 +82,8 @@ header p {
   border: 1px solid var(--clr-border-light);
   width: clamp(1vw, 9vw, 5rem);
   height: clamp(1vw, 9vw, 5rem);
-  color: var(--clr-text-numbers);
-  font-size: clamp(2.5vw, 5vw, 2rem);
+  color: rgb(243, 255, 232);
+  font-size: clamp(.8rem, 12vw, 2rem);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -100,31 +93,53 @@ header p {
   border-right: 5px solid var(--clr-border-dark);
 }
 button {
-  padding: 0.5rem 1rem;
-  color: var(--clr-text-numbers);
+  padding: .7rem 1.5rem;
+  border-radius:7px;
+  color: black;
   background-color: var(--clr-button);
   font-size: 1.4rem;
   cursor: pointer;
 }
-.selected {
-  background-color: var(--clr-button-selected);
+.difficulties button:nth-of-type(1){
+  background-color: #9ACCE9;
 }
-.options {
+.difficulties button:nth-of-type(2){
+  background-color: #E9D39A;
+}
+.difficulties button:nth-of-type(3){
+  background-color: #E6B2B2;
+}
+.selected {
+  filter:contrast(200%);
+}
+.difficulties {
   display: flex;
   flex-flow: row wrap;
-  gap: 1rem;
+  gap: 2rem;
   justify-content: center;
   align-items: center;
+  
 }
 label {
   font-size: 1.3rem;
+  color:white;
+  margin-right:1rem;
+}
+input{
+  all: unset;
+  background-color:white;
+  width:4rem;
+  text-align:center;
+  font-size: 1.4rem;
+  font-weight:600;
+  box-shadow:inset 0px 0px 4px 2px rgb(109, 109, 109, .8);
+
 }
 .success {
   display: none;
-  position: absolute;
-  bottom: 50px;
   text-align: center;
   width: 100%;
+  color:rgb(61, 187, 61);
 }
 .loading {
   display: none;
@@ -132,4 +147,15 @@ label {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.start{
+  font-size:2.1rem;
+  font-weight:600;
+  padding:1.3rem 2.5rem;
+  font-variant: small-caps;
+  background-color:#6DBC6C;
+  color:#1F2B26;  
+}
+.timeout{
+  margin: 2rem 0rem;
 }
